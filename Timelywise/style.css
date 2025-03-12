@@ -1,0 +1,311 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    background: #547e9c;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden; /* Prevents vertical scrolling */
+    color: white;
+}
+
+/* Sidebar Menu */
+#menu {
+    background: #2c3e50;
+    color: white;
+    width: 200px;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* Keeps it in place */
+    left: 0;
+    top: 0;
+    z-index: 100; /* Ensures it stays above other elements */
+    transition: width 0.3s ease-in-out; /* Smooth transition for resizing */
+}
+
+/* Sidebar minimized (width 50px) */
+#menu.minimized {
+    width: 50px; /* Width when minimized */
+    padding: 20px 5px; /* Padding for the minimized state */
+}
+
+/* Minimize Button inside Sidebar */
+#toggleSidebar {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px; /* Adjust the button position inside the sidebar */
+    right: -10px; /* Position it on the right side of the sidebar */
+    border-radius: 50%;
+    z-index: 200;
+}
+
+/* Rest of the content */
+#content {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow-x: auto !important; /* Enables horizontal scrolling */
+    width: calc(100vw - 200px); /* Ensures it doesn't get stuck in the sidebar */
+    height: 100vh;
+    position: relative;
+    transition: margin-left 0.3s ease-in-out; /* Smooth transition when sidebar is minimized */
+}
+
+/* Adjust Content when Sidebar is Minimized */
+#menu.minimized + #content {
+    margin-left: 50px; /* Adjusted content width when sidebar is minimized */
+}
+
+/* Sidebar Buttons */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-container button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Add Task Button */
+#addTask {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#addTask:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+/* Add Column Button */
+#addColumn {
+    background-color: #007bff;
+    color: white;
+}
+
+#addColumn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+#kanban-board {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto !important; /* Enables horizontal scrolling */
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    width: max-content !important; /* Ensures the board expands based on columns */
+    flex-grow: unset !important; /* Prevents forced width */
+}
+
+/* Column Styling - Restore Color */
+.column {
+    background-color: #1e3a56 !important; /* Ensures correct color */
+    padding: 10px;
+    min-width: 200px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: auto !important; /* Ensures height is based on tasks */
+}
+
+/* Column Header */
+.column-header {
+    display: flex;
+    align-items: center; /* Ensures the text and pencil icon are aligned vertically */
+    justify-content: space-between; /* Ensures they stay on opposite ends */
+    width: 100%;
+    padding: 10px;
+    background-color: #2c3e50; /* Column header background */
+    color: white; /* Text color */
+    border-radius: 5px 5px 0 0;
+    position: relative; /* For pencil positioning */
+}
+
+/* Pencil Button */
+.edit-column-name {
+    background: white;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background 0.3s;
+    position: absolute; /* Positioning the pencil icon absolutely */
+    right: 10px; /* Adjust the position of the pencil to the right */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Ensure it stays vertically centered */
+}
+
+.edit-column-name:hover {
+    transform: scale(1.1) translateY(-50%);
+    background: #ccc;
+}
+
+.task-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 50px; /* Prevents empty lists from collapsing */
+    padding: 10px;
+    flex-grow: 1; /* Expands when tasks are added */
+}
+
+/* Ensure each column only grows with its own tasks */
+.column {
+    min-height: auto !important;
+    height: fit-content !important;
+}
+
+/* Task Styling */
+.task {
+    background: #80a7c4;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: grab;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Delete Button */
+.delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 8.5px;
+    border-radius: 50%;
+}
+
+/* Add Task Button in Each Column */
+.add-task-btn {
+    background: #34c759;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 90%;
+    margin: 10px 0;
+    font-size: 14px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.add-task-btn:hover {
+    background: #2ca34f;
+    transform: scale(1.05);
+}
+
+/* Home Page */
+#home-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+}
+
+#home-container {
+    text-align: center;
+}
+
+#text {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: black;
+}
+
+/* Start Button */
+#startButton {
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#startButton:hover {
+    background-color: #45a049;
+}
+
+/* Sidebar Styling */
+#menu {
+    background: #2c3e50;
+    color: white;
+    width: 200px;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Minimized Sidebar */
+#menu.minimized {
+    width: 10px; /* Small width when minimized */
+    padding: 10px; /* Adjust padding */
+}
+
+/* Hide text when minimized */
+#menu.minimized h1,
+#menu.minimized .button-container button {
+    display: none;
+}
+
+/* Toggle Button */
+#toggleSidebar {
+    background: #1abc9c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Adjust Content when Sidebar is Minimized */
+#content {
+    margin-left: 200px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+#menu.minimized + #content {
+    margin-left: 50px;
+}
