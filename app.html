@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timelywise - Task Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="menu">
+        <h1>Timelywise</h1>
+        <div class="button-container">
+            <button id="addColumn">+ Add Column</button>
+        </div>
+        <!-- Toggle Button for Sidebar -->
+        <button id="toggleSidebar">☰</button>
+    </div>
+    
+    <div id="content">
+        <div id="kanban-board">
+            <div class="column" id="todo">
+                <div class="column-header">
+                    <h2 contenteditable="false">To Do</h2>
+                    <button class="edit-column-name">✏️</button>
+                </div>
+                <div class="task-list"></div>
+                <button class="add-task-btn">+ Add Task</button>
+            </div>
+            <div class="column" id="in-progress">
+                <div class="column-header">
+                    <h2 contenteditable="false">In Progress</h2>
+                    <button class="edit-column-name">✏️</button>
+                </div>
+                <div class="task-list"></div>
+                <button class="add-task-btn">+ Add Task</button>
+            </div>
+            <div class="column" id="done">
+                <div class="column-header">
+                    <h2 contenteditable="false">Done</h2>
+                    <button class="edit-column-name">✏️</button>
+                </div>
+                <div class="task-list"></div>
+                <button class="add-task-btn">+ Add Task</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script> <!-- Fixed the typo here -->
+</body>
+</html>
